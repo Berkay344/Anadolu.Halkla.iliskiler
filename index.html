@@ -1,119 +1,34 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canlı Yayın - Berkay Sportsᴴᴰ</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black; /* Arka plan siyah */
-            color: white; /* Yazı rengi beyaz */
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden; /* Sayfa kaydırılmasını engellemek için */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapattık</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: bold;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .hd {
-            font-size: 1.8rem;
-            font-weight: normal;
-            font-family: 'Arial', sans-serif;
-            color: #E4405F; /* HD yazısının rengi Instagram'a uygun */
-        }
-
-        video {
-            width: 80%;
-            max-width: 800px;
-            height: auto;
-            margin-top: 20px; /* Yayının üst kısmını yukarıya aldım */
-        }
-
-        footer {
-            position: relative;
-            margin-top: 20px; /* Footer'ı biraz daha yukarı taşıdım */
-        }
-
-        .instagram-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #E4405F; /* Instagram kırmızı rengi */
-            color: white;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .instagram-btn:hover {
-            background-color: #c13584; /* Hover efekti */
-        }
-
-    </style>
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+  </style>
 </head>
 <body>
-    <h1>𝗕𝗲𝗿𝗸𝗮𝘆 𝗦𝗽𝗼𝗿𝘁𝘀<span class="hd">ᴴᴰ</span></h1>
-    <video id="video" controls autoplay>
-        <source src="https://us-cdn-1.varsportscdn1.lol/601/index.m3u8" type="application/x-mpegURL">
-    </video>
-
-    <footer>
-        <h2>Developer by Berkay</h2>
-        <a href="https://www.instagram.com/trakyali_pitbul" class="instagram-btn" target="_blank">Instagram</a>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        var video = document.getElementById('video');
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource('https://us-cdn-1.varsportscdn1.lol/601/index.m3u8');
-            hls.attachMedia(video);
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-
-            hls.on(Hls.Events.ERROR, function(event, data) {
-                if (data.fatal) {
-                    switch (data.fatal) {
-                        case Hls.ErrorTypes.NETWORK_ERROR:
-                            console.log("Ağ hatası, bağlantıyı tekrar başlatıyoruz.");
-                            break;
-                        case Hls.ErrorTypes.MEDIA_ERROR:
-                            console.log("Medya hatası, akış tekrar başlatılıyor.");
-                            break;
-                        case Hls.ErrorTypes.OTHER_ERROR:
-                            console.log("Diğer hata: " + data);
-                            break;
-                        default:
-                            console.log("Bilinmeyen hata.");
-                            break;
-                    }
-                }
-            });
-        }
-        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://us-cdn-1.varsportscdn1.lol/601/index.m3u8';
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        }
-    </script>
+  <h1 id="message"></h1>
+  <script>
+    document.getElementById("message").innerText = "Kapattık babacım hadi...";
+  </script>
 </body>
 </html>
