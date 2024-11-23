@@ -1,96 +1,40 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Süper Lig Puan Tablosu - TFF</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      border: 1px solid #ddd;
-    }
-    th {
-      background-color: #007bff;
-      color: white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yayın Oynatıcı</title>
+    <style>
+        /* Oynatıcıyı merkezi konumlandır */
+        #player {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Süper Lig Puan Tablosu</h1>
+    <h1>Yayın Oynatıcı</h1>
+    <!-- Video oynatıcı -->
+    <video id="player" controls>
+        <source id="videoSource" type="application/x-mpegURL">
+        Tarayıcınız video etiketini desteklemiyor.
+    </video>
 
-  <table id="puanTablosu">
-    <thead>
-      <tr>
-        <th>Takım</th>
-        <th>Oynanan Maç</th>
-        <th>Galibiyet</th>
-        <th>Beraberlik</th>
-        <th>Mağlubiyet</th>
-        <th>Puan</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Dinamik olarak veri buraya eklenecek -->
-    </tbody>
-  </table>
+    <script>
+        // M3U Plus URL'sini belirleyin
+        var streamURL = "http://mu.lz-0001.xyz:8080/get.php?username=abdurrahman@7282&password=ab826@8203hm&type=m3u_plus";
 
-  <script>
-    // Fetch API ile TFF web sayfası verisini çekme
-    fetch('https://www.tff.org/default.aspx?pageID=198')
-      .then(response => response.text())
-      .then(html => {
-        // Sayfanın HTML içeriğini parse ediyoruz
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
+        // Video kaynağını güncelleyin
+        document.getElementById('videoSource').src = streamURL;
 
-        // Süper Lig Puan Tablosu'nu içeren tabloyu buluyoruz
-        const table = doc.querySelector('.puan-tablosu-class'); // Bu kısım sitenin HTML yapısına bağlı olarak değişir
-        const rows = table.querySelectorAll('tr');
-        
-        // Tabloyu ekrana yazdıralım
-        let tableBody = document.getElementById('puanTablosu').getElementsByTagName('tbody')[0];
-        rows.forEach(row => {
-          const cells = row.querySelectorAll('td');
-          if (cells.length) {
-            const name = cells[0].textContent.trim();
-            const played = cells[1].textContent.trim();
-            const won = cells[2].textContent.trim();
-            const draw = cells[3].textContent.trim();
-            const lost = cells[4].textContent.trim();
-            const points = cells[5].textContent.trim();
-            
-            // Tabloya yeni satır ekliyoruz
-            let newRow = tableBody.insertRow();
-            newRow.innerHTML = `
-              <td>${name}</td>
-              <td>${played}</td>
-              <td>${won}</td>
-              <td>${draw}</td>
-              <td>${lost}</td>
-              <td>${points}</td>
-            `;
-          }
-        });
-      })
-      .catch(error => console.error('Error fetching data:', error));
-  </script>
+        // Video oynatıcıyı yeniden yükleyin
+        var player = document.getElementById('player');
+        player.load();  // Kaynağı güncelleyip video oynatıcıyı başlatır
+        player.play();  // Yayını hemen başlatır
+    </script>
 
 </body>
 </html>
