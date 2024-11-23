@@ -1,138 +1,96 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Süper Lig Puan Tablosu</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
-        }
-
-        .table-container {
-            margin: 20px;
-            padding: 10px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #2c3e50;
-            color: white;
-        }
-
-        .team-logo {
-            width: 30px;
-            height: 30px;
-        }
-
-        .rank {
-            font-weight: bold;
-        }
-
-        .error {
-            color: red;
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Süper Lig Puan Tablosu - TFF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <h1>Süper Lig Puan Tablosu</h1>
 
-    <div class="table-container">
-        <table id="leagueTable">
-            <thead>
-                <tr>
-                    <th>Sıra</th>
-                    <th>Takım</th>
-                    <th>Oynanan Maç</th>
-                    <th>Galibiyet</th>
-                    <th>Beraberlik</th>
-                    <th>Mağlubiyet</th>
-                    <th>Attığı Gol</th>
-                    <th>Yediği Gol</th>
-                    <th>Avuç Farkı</th>
-                    <th>Puan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Puan tablosu verileri burada görünecek -->
-            </tbody>
-        </table>
-    </div>
+  <h1>Süper Lig Puan Tablosu</h1>
 
-    <div id="errorMessage" class="error" style="display: none;">
-        Veri yüklenirken bir hata oluştu. Lütfen tekrar deneyin.
-    </div>
+  <table id="puanTablosu">
+    <thead>
+      <tr>
+        <th>Takım</th>
+        <th>Oynanan Maç</th>
+        <th>Galibiyet</th>
+        <th>Beraberlik</th>
+        <th>Mağlubiyet</th>
+        <th>Puan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dinamik olarak veri buraya eklenecek -->
+    </tbody>
+  </table>
 
-    <script>
-        const apiKey = "5aae3f00bfmsh44cd2d8f6babb70p17a9afjsn03300e779464";
-        const apiUrl = "https://super-lig-standings.p.rapidapi.com/api/standings";
+  <script>
+    // Fetch API ile TFF web sayfası verisini çekme
+    fetch('https://www.tff.org/default.aspx?pageID=198')
+      .then(response => response.text())
+      .then(html => {
+        // Sayfanın HTML içeriğini parse ediyoruz
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
 
-        const apiHeaders = {
-            "X-RapidAPI-Key": apiKey,
-            "X-RapidAPI-Host": "super-lig-standings.p.rapidapi.com"
-        };
+        // Süper Lig Puan Tablosu'nu içeren tabloyu buluyoruz
+        const table = doc.querySelector('.puan-tablosu-class'); // Bu kısım sitenin HTML yapısına bağlı olarak değişir
+        const rows = table.querySelectorAll('tr');
+        
+        // Tabloyu ekrana yazdıralım
+        let tableBody = document.getElementById('puanTablosu').getElementsByTagName('tbody')[0];
+        rows.forEach(row => {
+          const cells = row.querySelectorAll('td');
+          if (cells.length) {
+            const name = cells[0].textContent.trim();
+            const played = cells[1].textContent.trim();
+            const won = cells[2].textContent.trim();
+            const draw = cells[3].textContent.trim();
+            const lost = cells[4].textContent.trim();
+            const points = cells[5].textContent.trim();
+            
+            // Tabloya yeni satır ekliyoruz
+            let newRow = tableBody.insertRow();
+            newRow.innerHTML = `
+              <td>${name}</td>
+              <td>${played}</td>
+              <td>${won}</td>
+              <td>${draw}</td>
+              <td>${lost}</td>
+              <td>${points}</td>
+            `;
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
 
-        // Verileri tabloya eklemek için fonksiyon
-        function updateLeagueTable(data) {
-            const tableBody = document.getElementById("leagueTable").getElementsByTagName('tbody')[0];
-            data.forEach(item => {
-                const row = tableBody.insertRow();
-                row.innerHTML = `
-                    <td class="rank">${item.stats.rank}</td>
-                    <td><img src="${item.team.logo}" alt="${item.team.name}" class="team-logo"> ${item.team.name}</td>
-                    <td>${item.stats.gamesPlayed}</td>
-                    <td>${item.stats.wins}</td>
-                    <td>${item.stats.ties}</td>
-                    <td>${item.stats.losses}</td>
-                    <td>${item.stats.goalsFor}</td>
-                    <td>${item.stats.goalsAgainst}</td>
-                    <td>${item.stats.goalDifference}</td>
-                    <td>${item.stats.points}</td>
-                `;
-            });
-        }
-
-        // API'den veri al
-        fetch(apiUrl, { headers: apiHeaders })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);  // Veriyi konsola yazdır
-                if (data.length > 0) {
-                    updateLeagueTable(data);
-                } else {
-                    document.getElementById("errorMessage").style.display = "block";
-                }
-            })
-            .catch(error => {
-                console.error('Hata:', error);
-                document.getElementById("errorMessage").style.display = "block";
-            });
-    </script>
 </body>
 </html>
