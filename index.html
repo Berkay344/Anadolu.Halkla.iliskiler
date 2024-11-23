@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canlı Yayın Oynatıcı</title>
+    <title>Tek Kanal Yayını</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,7 +42,7 @@
 <body>
 
     <div class="container">
-        <h1>Canlı Yayın Oynatıcı</h1>
+        <h1>IPTV Tek Kanal Yayını</h1>
         <video id="videoPlayer" controls>
             <source id="videoSource" type="application/x-mpegURL">
             Tarayıcınız video etiketini desteklemiyor.
@@ -54,8 +54,8 @@
 
     <script>
         function startStream() {
-            // Kullanıcı adı ve şifreyi içeren m3u_plus URL'si
-            const url = 'https://us-cdn-1.varsportscdn1.lol/601/index.m3u8';
+            // M3U dosyasının URL'si
+            const url = 'http://noxpromax5.cfd/get.php?username=10.denizmahir.01&password=kece2023dnzmhr&type=m3u_plus';
             
             // Loading göstergesini göster
             document.getElementById('loading').style.display = 'block';
@@ -63,9 +63,18 @@
             fetch(url)
                 .then(response => response.text())
                 .then(data => {
-                    // M3U dosyasını işleyerek video akış linkini al
+                    // M3U dosyasındaki kanal linklerini işleyelim
                     const lines = data.split('\n');
-                    const videoUrl = lines.find(line => line.includes('.m3u8'));
+                    let videoUrl = null;
+
+                    // Burada sadece bir kanal URL'sini seçiyoruz
+                    // İlk kanalın URL'sini alalım
+                    for (let line of lines) {
+                        if (line.includes('.m3u8')) {
+                            videoUrl = line;
+                            break; // İlk kanal bulundu, duralım
+                        }
+                    }
 
                     // Eğer video URL'si bulunduysa
                     if (videoUrl) {
