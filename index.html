@@ -3,29 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HLS Yayın Oynatıcı</title>
-    <!-- Video.js CSS -->
-    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet">
+    <title>Canlı Yayın Oynatıcı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        video {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+            border: 2px solid #000;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>HLS Yayın Oynatıcı</h1>
-    
-    <!-- Video Oynatıcı -->
-    <video id="my-video" class="video-js vjs-default-skin" controls>
-        <source src="http://mu.lz-0001.xyz:8080/get.php?username=abdurrahman@7282&password=ab826@8203hm&type=m3u_plus" type="application/x-mpegURL">
-    </video>
-
-    <!-- Video.js ve HLS Eklentisi -->
-    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls@5.14.0/dist/videojs-contrib-hls.min.js"></script>
+    <div class="container">
+        <h1>Canlı Yayın Oynatıcı</h1>
+        <video id="videoPlayer" controls>
+            <source id="videoSource" type="application/x-mpegURL">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        <br>
+        <button onclick="startStream()">Yayını Başlat</button>
+        <div id="loading">Yayın Yükleniyor...</div>
+    </div>
 
     <script>
-        var player = videojs('my-video');
-        player.ready(function() {
-            console.log("Yayın başlatıldı!");
-            player.play();
-        });
+        function startStream() {
+            // Kullanıcı adı ve şifreyi içeren m3u_plus URL'si
+            const url = 'http://noxpromax5.cfd/get.php?username=10.denizmahir.01&password=kece2023dnzmhr&type=m3u_plus';
+            
+            // Loading göstergesini göster
+            document.getElementById('loading').style.display = 'block';
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    // M3U dosyasını işleyerek video akış linkini al
+                    const lines = data.split('\n');
+                    const videoUrl = lines.find(line => line.includes('.m3u8'));
+
+                    // Eğer video URL'si bulunduysa
+                    if (videoUrl) {
+                        const videoElement = document.getElementById('videoPlayer');
+                        const sourceElement = document.getElementById('videoSource');
+                        
+                        // Video kaynağını ayarla
+                        sourceElement.src = videoUrl;
+                        
+                        // Video oynatıcıyı başlat
+                        videoElement.load();
+                        videoElement.play();
+                    } else {
+                        alert('Video akışı bulunamadı!');
+                    }
+
+                    // Loading göstergesini gizle
+                    document.getElementById('loading').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Bir hata oluştu:', error);
+                    alert('Yayın yüklenemedi.');
+                    document.getElementById('loading').style.display = 'none';
+                });
+        }
     </script>
 
 </body>
