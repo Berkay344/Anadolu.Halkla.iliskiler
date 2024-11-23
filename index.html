@@ -3,130 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fenerbahçe Canlı Skor ve Süper Lig Tablosu</title>
+    <title>Fenerbahçe Canlı Skor & Süper Lig Puan Tablosu</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            text-align: center;
-            background-color: #f9f9f9;
         }
-
-        h1 {
-            background-color: #004d99;
+        header {
+            background-color: #0062a2;
             color: white;
-            padding: 15px 0;
+            text-align: center;
+            padding: 20px;
+        }
+        header h1 {
             margin: 0;
         }
-
-        #live-score {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #004d99;
-            color: white;
-            display: inline-block;
-            border-radius: 5px;
-        }
-
         #league-table {
-            width: 90%;
-            max-width: 800px;
-            margin: 20px auto;
+            width: 100%;
+            margin: 20px 0;
             border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         #league-table th, #league-table td {
+            padding: 10px;
+            text-align: center;
             border: 1px solid #ddd;
-            padding: 8px;
+        }
+        #league-table th {
+            background-color: #0062a2;
+            color: white;
+        }
+        #live-scores {
+            margin: 20px 0;
             text-align: center;
         }
-
-        #league-table th {
-            background-color: #004d99;
+        #live-scores h2 {
+            color: #333;
+        }
+        #live-scores .score {
+            font-size: 1.5em;
+            margin: 5px;
+        }
+        footer {
+            background-color: #0062a2;
             color: white;
-        }
-
-        #league-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #league-table tr:hover {
-            background-color: #ddd;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
 <body>
-    <h1>Fenerbahçe Canlı Skor ve Süper Lig Tablosu</h1>
-    <div id="live-score">Canlı Skor Yükleniyor...</div>
-    <table id="league-table">
-        <thead>
-            <tr>
-                <th>Takım</th>
-                <th>Oynanan</th>
-                <th>Puan</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td colspan="3">Puan durumu yükleniyor...</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <script>
-        // RapidAPI'den alınan Süper Lig API URL ve anahtar bilgileri
-        const apiUrl = "https://super-lig-standings.p.rapidapi.com/";
-        const apiHeaders = {
-            "x-rapidapi-host": "super-lig-standings.p.rapidapi.com",
-            "x-rapidapi-key": "5aae3f00bfmsh44cd2d8f6babb70p17a9afjsn03300e779464"
-        };
+<header>
+    <h1>Fenerbahçe Canlı Skor & Süper Lig Puan Tablosu</h1>
+    <p>Merhaba, bu sayfada Süper Lig'deki son durumları görebilirsiniz!</p>
+</header>
 
-        function updateLiveScore(data) {
-            const scoreElement = document.getElementById('live-score');
-            const fbMatch = data.matches.find(match => match.team1 === 'Fenerbahçe' || match.team2 === 'Fenerbahçe');
-            if (fbMatch) {
-                scoreElement.textContent = `${fbMatch.team1} ${fbMatch.score1} - ${fbMatch.score2} ${fbMatch.team2}`;
-            } else {
-                scoreElement.textContent = "Şu anda Fenerbahçe maçı yok.";
-            }
-        }
+<div id="live-scores">
+    <h2>Canlı Maç Skorları</h2>
+    <div id="live-score1" class="score">Yükleniyor...</div>
+    <div id="live-score2" class="score">Yükleniyor...</div>
+</div>
 
-        function updateLeagueTable(data) {
-            const tableBody = document.querySelector('#league-table tbody');
-            tableBody.innerHTML = ''; // Eski tabloyu temizle
-            data.standings.forEach(team => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${team.name}</td>
-                    <td>${team.played}</td>
-                    <td>${team.points}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
+<table id="league-table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Oynanan</th>
+            <th>Galibiyet</th>
+            <th>Mağlubiyet</th>
+            <th>Beraberlik</th>
+            <th>Atılan Gol</th>
+            <th>Yenilen Gol</th>
+            <th>Gol Farkı</th>
+            <th>Puan</th>
+        </tr>
+    </thead>
+    <tbody id="league-table-body">
+        <!-- Puan tablosu buraya eklenecek -->
+    </tbody>
+</table>
 
-        function fetchData() {
-            fetch(apiUrl, { headers: apiHeaders })
-                .then(response => response.json())
-                .then(data => {
-                    updateLiveScore(data);
-                    updateLeagueTable(data);
-                })
-                .catch(error => {
-                    console.error('Hata:', error);
-                });
-        }
+<footer>
+    <p>&copy; 2024 Fenerbahçe Canlı Skor</p>
+</footer>
 
-        // İlk veri yüklemesi
-        fetchData();
+<script>
+// API URL ve gerekli header bilgileri
+const apiUrl = "https://super-lig-standings.p.rapidapi.com/";
+const apiHeaders = {
+    "X-RapidAPI-Key": "YOUR_API_KEY", // API anahtarınızı buraya ekleyin
+    "X-RapidAPI-Host": "super-lig-standings.p.rapidapi.com"
+};
 
-        // Verileri her 30 saniyede bir güncelle
-        setInterval(fetchData, 30000);
-    </script>
+// Canlı maç skorları ve lig puan tablosu verisini çeken fonksiyon
+function fetchData() {
+    fetch(apiUrl, { headers: apiHeaders })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // API yanıtını kontrol etmek için
+            updateLeagueTable(data);
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+        });
+}
+
+// Puan tablosunu güncelleme
+function updateLeagueTable(data) {
+    // Tabloyu temizle
+    const tableBody = document.getElementById("league-table-body");
+    tableBody.innerHTML = '';
+
+    // API yanıtındaki her takım için bir satır ekle
+    data.forEach(item => {
+        const team = item.team;
+        const stats = item.stats;
+
+        // Satır oluştur
+        const row = document.createElement("tr");
+
+        // Hücreler oluştur
+        const rankCell = document.createElement("td");
+        rankCell.textContent = stats.rank;
+        
+        const teamNameCell = document.createElement("td");
+        const logo = document.createElement("img");
+        logo.src = team.logo;
+        logo.alt = team.name;
+        logo.style.width = "30px"; // Logo boyutunu ayarlayın
+        const teamNameText = document.createElement("span");
+        teamNameText.textContent = team.name;
+        teamNameCell.appendChild(logo);
+        teamNameCell.appendChild(teamNameText);
+
+        const playedCell = document.createElement("td");
+        playedCell.textContent = stats.gamesPlayed;
+
+        const winsCell = document.createElement("td");
+        winsCell.textContent = stats.wins;
+
+        const lossesCell = document.createElement("td");
+        lossesCell.textContent = stats.losses;
+
+        const tiesCell = document.createElement("td");
+        tiesCell.textContent = stats.ties;
+
+        const goalsForCell = document.createElement("td");
+        goalsForCell.textContent = stats.goalsFor;
+
+        const goalsAgainstCell = document.createElement("td");
+        goalsAgainstCell.textContent = stats.goalsAgainst;
+
+        const goalDifferenceCell = document.createElement("td");
+        goalDifferenceCell.textContent = stats.goalDifference;
+
+        const pointsCell = document.createElement("td");
+        pointsCell.textContent = stats.points;
+
+        // Hücreleri satıra ekle
+        row.appendChild(rankCell);
+        row.appendChild(teamNameCell);
+        row.appendChild(playedCell);
+        row.appendChild(winsCell);
+        row.appendChild(lossesCell);
+        row.appendChild(tiesCell);
+        row.appendChild(goalsForCell);
+        row.appendChild(goalsAgainstCell);
+        row.appendChild(goalDifferenceCell);
+        row.appendChild(pointsCell);
+
+        // Satırı tabloya ekle
+        tableBody.appendChild(row);
+    });
+}
+
+// Sayfa yüklendiğinde API verisini çek
+document.addEventListener("DOMContentLoaded", fetchData);
+</script>
+
 </body>
 </html>
