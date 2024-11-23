@@ -3,37 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yayın Oynatıcı</title>
-    <style>
-        /* Oynatıcıyı merkezi konumlandır */
-        #player {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            display: block;
-        }
-    </style>
+    <title>HLS Yayın Oynatıcı</title>
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet">
 </head>
 <body>
 
-    <h1>Yayın Oynatıcı</h1>
-    <!-- Video oynatıcı -->
-    <video id="player" controls>
-        <source id="videoSource" type="application/x-mpegURL">
-        Tarayıcınız video etiketini desteklemiyor.
+    <h1>HLS Yayın Oynatıcı</h1>
+    
+    <!-- Video Oynatıcı -->
+    <video id="my-video" class="video-js vjs-default-skin" controls>
+        <source src="http://mu.lz-0001.xyz:8080/get.php?username=abdurrahman@7282&password=ab826@8203hm&type=m3u_plus" type="application/x-mpegURL">
     </video>
 
+    <!-- Video.js ve HLS Eklentisi -->
+    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls@5.14.0/dist/videojs-contrib-hls.min.js"></script>
+
     <script>
-        // M3U Plus URL'sini belirleyin
-        var streamURL = "http://mu.lz-0001.xyz:8080/get.php?username=abdurrahman@7282&password=ab826@8203hm&type=m3u_plus";
-
-        // Video kaynağını güncelleyin
-        document.getElementById('videoSource').src = streamURL;
-
-        // Video oynatıcıyı yeniden yükleyin
-        var player = document.getElementById('player');
-        player.load();  // Kaynağı güncelleyip video oynatıcıyı başlatır
-        player.play();  // Yayını hemen başlatır
+        var player = videojs('my-video');
+        player.ready(function() {
+            console.log("Yayın başlatıldı!");
+            player.play();
+        });
     </script>
 
 </body>
