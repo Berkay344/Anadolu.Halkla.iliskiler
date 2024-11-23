@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tek Kanal Yayını</title>
+    <title>Selçuk Sports - Alternatif 1 Yayını</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
         .container {
             margin-top: 50px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         video {
             width: 80%;
@@ -21,86 +25,17 @@
             height: auto;
             border: 2px solid #000;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #loading {
-            display: none;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>IPTV Tek Kanal Yayını</h1>
-        <video id="videoPlayer" controls>
-            <source id="videoSource" type="application/x-mpegURL">
+        <h1>Selçuk Sports - Alternatif 1</h1>
+        <video controls>
+            <source src="https://528dc4ef17d725ed.mediapackage.eu-central-1.amazonaws.com/out/v1/eb0737453a18465699f31a622649ded5/manifest_1.m3u8" type="application/x-mpegURL">
             Tarayıcınız video etiketini desteklemiyor.
         </video>
-        <br>
-        <button onclick="startStream()">Yayını Başlat</button>
-        <div id="loading">Yayın Yükleniyor...</div>
     </div>
-
-    <script>
-        function startStream() {
-            // M3U dosyasının URL'si
-            const url = 'http://noxpromax5.cfd/get.php?username=10.denizmahir.01&password=kece2023dnzmhr&type=m3u_plus';
-            
-            // Loading göstergesini göster
-            document.getElementById('loading').style.display = 'block';
-
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    // M3U dosyasındaki kanal linklerini işleyelim
-                    const lines = data.split('\n');
-                    let videoUrl = null;
-
-                    // Burada sadece bir kanal URL'sini seçiyoruz
-                    // İlk kanalın URL'sini alalım
-                    for (let line of lines) {
-                        if (line.includes('.m3u8')) {
-                            videoUrl = line;
-                            break; // İlk kanal bulundu, duralım
-                        }
-                    }
-
-                    // Eğer video URL'si bulunduysa
-                    if (videoUrl) {
-                        const videoElement = document.getElementById('videoPlayer');
-                        const sourceElement = document.getElementById('videoSource');
-                        
-                        // Video kaynağını ayarla
-                        sourceElement.src = videoUrl;
-                        
-                        // Video oynatıcıyı başlat
-                        videoElement.load();
-                        videoElement.play();
-                    } else {
-                        alert('Video akışı bulunamadı!');
-                    }
-
-                    // Loading göstergesini gizle
-                    document.getElementById('loading').style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Bir hata oluştu:', error);
-                    alert('Yayın yüklenemedi.');
-                    document.getElementById('loading').style.display = 'none';
-                });
-        }
-    </script>
 
 </body>
 </html>
