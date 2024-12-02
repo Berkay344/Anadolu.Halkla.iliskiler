@@ -1,122 +1,121 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kapattık</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: black;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Yayın - Berkay Sportsᴴᴰ</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Arka plan siyah */
+            color: white; /* Yazı rengi beyaz */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden; /* Sayfa kaydırılmasını engellemek için */
+        }
 
-    img {
-      max-width: 200px;
-      margin-bottom: 20px;
-    }
+        h1 {
+            margin: 0;
+            font-size: 1.9rem;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+        }
 
-    h1 {
-      font-size: 38px;
-      font-weight: bold;
-      text-align: center;
-      letter-spacing: 2px;
-      opacity: 0;
-      animation: slideIn 3s forwards;
-    }
+        .hd {
+            font-size: 1.8rem;
+            font-weight: normal;
+            font-family: 'Arial', sans-serif;
+            color: #4287f5; /* HD yazısının mavi rengi */
+        }
 
-    @keyframes slideIn {
-      0% {
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
+        video {
+            width: 90%; /* Ekran boyutu genişletildi */
+            max-width: 1000px;
+            height: auto;
+            margin-top: 20px;
+            border: 5px solid #4287f5; /* Neon mavisi çerçeve */
+            box-shadow: 0 0 15px #4287f5; /* Neon ışık efekti */
+            border-radius: 10px; /* Çerçeve kenarlarını yuvarlatma */
+        }
 
-    /* Canlı Yayın Animasyonu */
-    .live-broadcast {
-      margin-top: 30px;
-      font-size: 40px;
-      color: #DC143C;
-      font-weight: bold;
-      text-align: center;
-      animation: broadcastAnimation 1.5s infinite;
-    }
+        footer {
+            position: relative;
+            margin-top: 20px; /* Footer'ı biraz daha yukarı taşıdım */
+        }
 
-    /* Canlı Yayın Yanıp Sönme Animasyonu */
-    @keyframes broadcastAnimation {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0;
-      }
-    }
+        .instagram-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4287f5; /* Instagram mavi rengi */
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
 
-    /* Yükleniyor Simgesi */
-    .loading {
-      margin-top: 40px;
-      font-size: 60px;
-      font-weight: bold;
-      color: #007bff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: dotSpin 1.5s infinite;
-    }
-
-    .dot::after {
-      content: '•';
-      animation: dotAnim 1.5s infinite;
-    }
-
-    .dot2::after {
-      content: '••';
-      animation: dotAnim 1.5s 0.5s infinite;
-    }
-
-    .dot3::after {
-      content: '•••';
-      animation: dotAnim 1.5s 1s infinite;
-    }
-
-    @keyframes dotAnim {
-      0%, 100% {
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-  </style>
+        .instagram-btn:hover {
+            background-color: #1e56a0; /* Hover efekti */
+        }
+    </style>
 </head>
 <body>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_bein_sports_1.png" alt="BeinConnect Logosu">
-  <h1 id="message">Buralar Karışacak! Vaziyet Alın.</h1>
-  
-  <!-- Canlı Yayın Animasyonu -->
-  <div class="live-broadcast">Sadece Maç saatinde!</div>
+    <h1>𝗕𝗲𝗿𝗸𝗮𝘆 𝗦𝗽𝗼𝗿𝘁𝘀<span class="hd">ᴴᴰ</span></h1>
+    <video id="video" controls autoplay>
+        <source src="http://turkboxtitan.com:8080/play/live.php?mac=00:1A:79:10:E1:36&stream=423873&extension=m3u8" type="application/x-mpegURL">
+    </video>
 
-  <!-- Yükleniyor Animasyonu -->
-  <div class="loading">
-    <span class="dot"></span>
-    <span class="dot2"></span>
-    <span class="dot3"></span>
-  </div>
+    <footer>
+        <h2>Developer by Berkay</h2>
+        <a href="https://www.instagram.com/trakyali_pitbul" class="instagram-btn" target="_blank">Instagram</a>
+    </footer>
 
-  <script>
-    document.getElementById("message").innerText = "Buralar Karışacak Vaziyet Alın.";
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        var video = document.getElementById('video');
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource('https://us-cdn-1.varsportscdn1.lol/601/index.m3u8');
+            hls.attachMedia(video);
+
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+
+            hls.on(Hls.Events.ERROR, function(event, data) {
+                if (data.fatal) {
+                    switch (data.fatal) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            console.log("Ağ hatası, bağlantıyı tekrar başlatıyoruz.");
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            console.log("Medya hatası, akış tekrar başlatılıyor.");
+                            break;
+                        case Hls.ErrorTypes.OTHER_ERROR:
+                            console.log("Diğer hata: " + data);
+                            break;
+                        default:
+                            console.log("Bilinmeyen hata.");
+                            break;
+                    }
+                }
+            });
+        }
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'https://us-cdn-1.varsportscdn1.lol/601/index.m3u8';
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        }
+    </script>
 </body>
 </html>
