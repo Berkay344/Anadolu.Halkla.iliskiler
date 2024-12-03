@@ -1,121 +1,119 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canlı Yayın - Berkay Sportsᴴᴰ</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black; /* Arka plan siyah */
-            color: white; /* Yazı rengi beyaz */
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden; /* Sayfa kaydırılmasını engellemek için */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapattık</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 1.9rem;
-            font-weight: bold;
-            font-family: 'Arial', sans-serif;
-        }
+    .header {
+      position: absolute;
+      top: 20px;
+      font-size: 40px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 3px;
+      text-align: center;
+      width: 100%;
+    }
 
-        .hd {
-            font-size: 1.8rem;
-            font-weight: normal;
-            font-family: 'Arial', sans-serif;
-            color: #4287f5; /* HD yazısının mavi rengi */
-        }
+    .logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
 
-        video {
-            width: 90%; /* Ekran boyutu genişletildi */
-            max-width: 1000px;
-            height: auto;
-            margin-top: 20px;
-            border: 5px solid #4287f5; /* Neon mavisi çerçeve */
-            box-shadow: 0 0 15px #4287f5; /* Neon ışık efekti */
-            border-radius: 10px; /* Çerçeve kenarlarını yuvarlatma */
-        }
+    .logos .fenerbahce-logo {
+      width: 130px; /* Fenerbahçe logosu için genişlik */
+      height: 130px; /* Fenerbahçe logosu için yükseklik */
+      border-radius: 50%; /* Yuvarlak yapmak için */
+    }
 
-        footer {
-            position: relative;
-            margin-top: 20px; /* Footer'ı biraz daha yukarı taşıdım */
-        }
+    .logos .besiktas-logo {
+      width: 110px; /* Beşiktaş logosu için genişlik */
+      height: 145px; /* Beşiktaş logosu için yükseklik */
+      border-radius: 50%; /* Yuvarlak yapmak için */
+    }
 
-        .instagram-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4287f5; /* Instagram mavi rengi */
-            color: white;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            text-align: center;
-        }
+    .team-names {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
 
-        .instagram-btn:hover {
-            background-color: #1e56a0; /* Hover efekti */
-        }
-    </style>
+    .team-names .fenerbahce, .team-names .besiktas {
+      font-size: 24px; /* Yazı boyutunu küçülttüm */
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .team-names .fenerbahce {
+      color: yellow; /* Fenerbahçe yazısını sarı renkte */
+    }
+
+    .countdown {
+      margin-top: 20px;
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>𝗕𝗲𝗿𝗸𝗮𝘆 𝗦𝗽𝗼𝗿𝘁𝘀<span class="hd">ᴴᴰ</span></h1>
-    <video id="video" controls autoplay>
-        <source src="http://turkboxtitan.com:8080/play/live.php?mac=00:1A:79:10:E1:36&stream=423873&extension=m3u8" type="application/x-mpegURL">
-    </video>
+  <div class="header">Derbide Buradayız</div> <!-- Başlık Eklendi -->
 
-    <footer>
-        <h2>Developer by Berkay</h2>
-        <a href="https://www.instagram.com/trakyali_pitbul" class="instagram-btn" target="_blank">Instagram</a>
-    </footer>
+  <div class="logos">
+    <img src="https://www.fenerbahce.org/getmedia/bf4b326b-90f0-4a6a-a332-edbfb6603de7/mobile-emblem-info.png.aspx?width=410&height=410&ext=.png" alt="Fenerbahçe Logosu" class="fenerbahce-logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Be%C5%9Fikta%C5%9F_Logo_Be%C5%9Fikta%C5%9F_Amblem_Be%C5%9Fikta%C5%9F_Arma.png" alt="Beşiktaş Logosu" class="besiktas-logo">
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        var video = document.getElementById('video');
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource('https://us-cdn-1.varsportscdn1.lol/601/index.m3u8');
-            hls.attachMedia(video);
+  <div class="team-names">
+    <div class="fenerbahce">Fenerbahçe</div>
+    <div class="besiktas">Beşiktaş</div>
+  </div>
 
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
+  <!-- Geri Sayım -->
+  <div class="countdown" id="countdown"></div>
 
-            hls.on(Hls.Events.ERROR, function(event, data) {
-                if (data.fatal) {
-                    switch (data.fatal) {
-                        case Hls.ErrorTypes.NETWORK_ERROR:
-                            console.log("Ağ hatası, bağlantıyı tekrar başlatıyoruz.");
-                            break;
-                        case Hls.ErrorTypes.MEDIA_ERROR:
-                            console.log("Medya hatası, akış tekrar başlatılıyor.");
-                            break;
-                        case Hls.ErrorTypes.OTHER_ERROR:
-                            console.log("Diğer hata: " + data);
-                            break;
-                        default:
-                            console.log("Bilinmeyen hata.");
-                            break;
-                    }
-                }
-            });
-        }
-        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://us-cdn-1.varsportscdn1.lol/601/index.m3u8';
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        }
-    </script>
+  <script>
+    // Geri Sayım İşlevi
+    const matchDate = new Date("2024-12-07T19:00:00").getTime(); // 7 Aralık Cumartesi 19:00
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = matchDate - now;
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerText = 
+          `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
+      } else {
+        document.getElementById("countdown").innerText = "Derbi Başladı!";
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
