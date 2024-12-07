@@ -1,377 +1,143 @@
 <!DOCTYPE html>
-
 <html lang="tr">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Berkay Sportsᴴᴰ Tüm Maçlar Hd Kalitesinde...</title>
-
-    <link rel="icon" type="image/png" href="https://i.hizliresim.com/rp9zm4r.png">
-
-    <style>
-
-        body {
-
-            margin: 0;
-
-            padding: 0;
-
-            background-color: black; /* Arka plan rengi */
-
-            color: white;
-
-            font-family: Arial, sans-serif;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-
-            align-items: center;
-
-            height: 100vh;
-
-            text-align: center;
-
-            overflow: hidden;
-
-        }
-
-
-
-        h1 {
-
-            margin: 0;
-
-            font-size: 1.9rem;
-
-            font-weight: bold;
-
-            font-family: 'Arial', sans-serif;
-
-        }
-
-
-
-        .hd {
-
-            font-size: 1.8rem;
-
-            font-weight: normal;
-
-            font-family: 'Arial', sans-serif;
-
-            color: white;
-
-        }
-
-
-
-        video {
-
-            width: 90%;
-
-            max-width: 1000px;
-
-            height: auto;
-
-            margin-top: 20px;
-
-            border-radius: 10px;
-
-        }
-
-
-
-        footer {
-
-            position: relative;
-
-            margin-top: 20px;
-
-        }
-
-
-
-        .action-section {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            margin-top: 30px;
-
-            gap: 10px;
-
-        }
-
-
-
-        .action-section a {
-
-            text-decoration: none;
-
-            color: white;
-
-            font-size: 1.2rem;
-
-            font-weight: bold;
-
-            padding: 10px 20px;
-
-            border-radius: 5px;
-
-            background-color: black;
-
-            transition: background-color 0.3s ease;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            animation: slideIn 1s ease-out;
-
-        }
-
-
-
-        .action-section a:hover {
-
-            background-color: #1e56a0;
-
-        }
-
-
-
-        .instagram-logo {
-
-            width: 65px;
-
-            height: 65px;
-
-            margin-right: 10px;
-
-            margin-top: 5px;
-
-            animation: shake 2s infinite;
-
-        }
-
-
-
-        .logo-container {
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            width: 100%;
-
-            margin-bottom: 20px;
-
-        }
-
-
-
-        .logo-container img {
-
-            max-width: 100%;
-
-            height: auto;
-
-            display: block;
-
-        }
-
-
-
-        @keyframes slideIn {
-
-            0% {
-
-                transform: translateX(-100%);
-
-                opacity: 0;
-
-            }
-
-            100% {
-
-                transform: translateX(0);
-
-                opacity: 1;
-
-            }
-
-        }
-
-
-
-        @keyframes shake {
-
-            0% {
-
-                transform: rotate(-5deg);
-
-            }
-
-            25% {
-
-                transform: rotate(5deg);
-
-            }
-
-            50% {
-
-                transform: rotate(-5deg);
-
-            }
-
-            75% {
-
-                transform: rotate(5deg);
-
-            }
-
-            100% {
-
-                transform: rotate(0deg);
-
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapalıyız</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    img {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: slideIn 3s forwards;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .live-broadcast {
+      margin-top: 30px;
+      font-size: 40px;
+      color: #DC143C;
+      font-weight: bold;
+      text-align: center;
+      animation: broadcastAnimation 1.5s infinite;
+    }
+
+    @keyframes broadcastAnimation {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .loading {
+      margin-top: 40px;
+      font-size: 60px;
+      font-weight: bold;
+      color: #007bff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: dotSpin 1.5s infinite;
+    }
+
+    .dot::after {
+      content: '•';
+      animation: dotAnim 1.5s infinite;
+    }
+
+    .dot2::after {
+      content: '••';
+      animation: dotAnim 1.5s 0.5s infinite;
+    }
+
+    .dot3::after {
+      content: '•••';
+      animation: dotAnim 1.5s 1s infinite;
+    }
+
+    @keyframes dotAnim {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .instagram-link {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .instagram-link img {
+      width: 30px;
+      margin-right: 10px;
+    }
+
+    .instagram-link:hover {
+      color: #E1306C;
+    }
+  </style>
 </head>
-
 <body>
+  <img src="https://i.hizliresim.com/rp9zm4r.png" alt="Berkay Sports Logosu">
+  <h1 id="message">Buralar Karışacak! Vaziyet Alın.</h1>
+  
+  <!-- Canlı Yayın Animasyonu -->
+  <div class="live-broadcast">Sadece Maç saatinde!</div>
 
-    <div class="logo-container">
+  <!-- Yükleniyor Animasyonu -->
+  <div class="loading">
+    <span class="dot"></span>
+    <span class="dot2"></span>
+    <span class="dot3"></span>
+  </div>
 
-        <img src="https://i.hizliresim.com/rp9zm4r.png" alt="Logo" width="300px">
+  <!-- Instagram Link -->
+  <a href="https://www.instagram.com/trakyali_pitbul/" class="instagram-link" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logosu">
+    Takip et / Destek ol 
+  </a>
 
-    </div>
-
-
-
-    <video id="video" controls autoplay>
-
-        <source src="http://turkboxtitan.com:8080/play/live.php?mac=00:1A:79:10:E1:36&stream=423873&extension=m3u8" type="application/x-mpegURL">
-
-    </video>
-
-
-
-    <footer>
-
-        <h2>Developer by Berkay</h2>
-
-        <div class="action-section">
-
-            <a href="https://www.instagram.com/trakyali_pitbul" target="_blank">
-
-                <img class="instagram-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
-
-                Takip Et Destek Ol
-
-            </a>
-
-        </div>
-
-    </footer>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-    <script>
-
-        var video = document.getElementById('video');
-
-        
-
-        if (Hls.isSupported()) {
-
-            var hls = new Hls();
-
-            hls.loadSource('https://us-cdn-1.varsportscdn1.lol/601/tracks-v1a1/mono.m3u8');
-
-            hls.attachMedia(video);
-
-
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-
-                video.play();
-
-            });
-
-
-
-            hls.on(Hls.Events.ERROR, function(event, data) {
-
-                if (data.fatal) {
-
-                    switch (data.fatal) {
-
-                        case Hls.ErrorTypes.NETWORK_ERROR:
-
-                            console.log("Ağ hatası, bağlantıyı tekrar başlatıyoruz.");
-
-                            break;
-
-                        case Hls.ErrorTypes.MEDIA_ERROR:
-
-                            console.log("Medya hatası, akış tekrar başlatılıyor.");
-
-                            break;
-
-                        case Hls.ErrorTypes.OTHER_ERROR:
-
-                            console.log("Diğer hata: " + data);
-
-                            break;
-
-                        default:
-
-                            console.log("Bilinmeyen hata.");
-
-                            break;
-
-                    }
-
-                }
-
-            });
-
-        }
-
-        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-
-            video.src = 'https://us-cdn-1.varsportscdn1.lol/601/index.m3u8';
-
-            video.addEventListener('loadedmetadata', function () {
-
-                video.play();
-
-            });
-
-        }
-
-    </script>
-
+  <script>
+    document.getElementById("message").innerText = "Buralar Karışacak Vaziyet Alın.";
+  </script>
 </body>
-
 </html>
