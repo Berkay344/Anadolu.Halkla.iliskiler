@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-95L7Z1NDLG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-95L7Z1NDLG');
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canlı Yayın - Berkay Sportsᴴᴰ</title>
+    <title>Tüm maçların Hd yayını... Berkay Sportsᴴᴰ</title>
     <link rel="icon" type="image/png" href="https://i.hizliresim.com/q0z3s8m.png">
+
+    <!-- Open Graph Meta Etiketleri -->
+    <meta property="og:title" content="Berkay Sportsᴴᴰ">
+    <meta property="og:description" content="Tüm maçların HD yayını ve Süper Lig  burada!">
+    <meta property="og:image" content="https://i.hizliresim.com/rp9zm4r.png">
+    <meta property="og:url" content="https://berkay344.github.io/BerkaySportsHd">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Berkay Sportsᴴᴰ - Canlı Maç Yayını">
+    <meta name="twitter:description" content="Tüm maçların HD yayını ve Süper Lig skorları burada!">
+    <meta name="twitter:image" content="https://i.hizliresim.com/rp9zm4r.png">
+
     <style>
         body {
             margin: 0;
@@ -204,7 +207,7 @@
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = 'https://us-cdn-1.varsportscdn1.lol/601/tracks-v1a1/mono.m3u8';
-            video.addEventListener('loadedmetadata', function () {
+            video.addEventListener('loadedmetadata', function() {
                 video.play();
             });
         }
