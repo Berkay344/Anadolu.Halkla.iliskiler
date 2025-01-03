@@ -23,10 +23,8 @@
     }
 
     h1 {
-      font-size: 36px; /* Başlık boyutunu artırdım */
-      font-weight: bold; /* Kalınlaştırdım */
-      color: red; /* Kırmızı renk yaptım */
-      margin-bottom: 20px; /* Alt boşluk ekledim */
+      font-weight: bold;
+      color: red;
     }
 
     .credit {
@@ -148,6 +146,14 @@
     .clear-button:hover {
       background-color: #cc0000;
     }
+
+    .save-button {
+      background-color: green;
+    }
+
+    .save-button:hover {
+      background-color: #005f00;
+    }
   </style>
 </head>
 <body>
@@ -165,6 +171,7 @@
       </select>
       
       <button onclick="convertCurrency()">Hesapla</button>
+      <button class="save-button" onclick="saveData()">Kaydet</button>
     </div>
 
     <div id="result"></div>
@@ -217,12 +224,61 @@
       lehva: 17.00   
     };
 
+    // Verilerin kaydedilmesi
+    function saveData() {
+      const amount = document.getElementById("amount").value;
+      const currency = document.getElementById("currency").value;
+      const rate = exchangeRates[currency];
+      const symbols = {
+        euro: '€',
+        dollar: '$',
+        lehva: 'лв'
+      };
+      if (amount && rate) {
+        const result = Math.round(amount * rate);
+        const formattedResult = result.toLocaleString('tr-TR');
+        const now = new Date().toLocaleTimeString();
+        
+        // Veriyi localStorage'a kaydet
+        let history = JSON.parse(localStorage.getItem("historyData")) || [];
+        history.push({
+          time: now,
+          currency: currency === 'euro' ? 'Euro (€)' : currency === 'dollar' ? 'Dolar ($)' : 'Lehva (лв)',
+          amount: `${amount} ${symbols[currency]}`,
+          result: `${formattedResult}₺`
+        });
+        
+        localStorage.setItem("historyData", JSON.stringify(history));
+        loadHistory(); // Tabloyu güncelle
+      }
+    }
+
+    // Verileri localStorage'tan yüklemek
+    function loadHistory() {
+      const historyTable = document.getElementById("history");
+      const history = JSON.parse(localStorage.getItem("historyData")) || [];
+      historyTable.innerHTML = "";
+      history.forEach(entry => {
+        const newRow = `
+          <tr>
+            <td>${entry.time}</td>
+            <td>${entry.currency}</td>
+            <td>${entry.amount}</td>
+            <td>${entry.result}</td>
+          </tr>
+        `;
+        historyTable.insertAdjacentHTML("beforeend", newRow);
+      });
+    }
+
+    // Sayfa ilk açıldığında verileri yükle
+    window.onload = loadHistory;
+
     function convertCurrency() {
       const amount = document.getElementById("amount").value;
       const currency = document.getElementById("currency").value;
       const rate = exchangeRates[currency];
       const resultElement = document.getElementById("result");
-      const historyTable = document.getElementById("history");
 
       const symbols = {
         euro: '€',
@@ -232,30 +288,18 @@
 
       if (amount && rate) {
         const result = Math.round(amount * rate);
-        const formattedResult = result.toLocaleString('tr-TR'); // Türkçe formatta binlik ayırıcı ile
-        const now = new Date().toLocaleTimeString();
-
+        const formattedResult = result.toLocaleString('tr-TR');
         resultElement.innerHTML = `
           <p>${amount} ${symbols[currency]} = ${formattedResult}₺</p>
         `;
-
-        const newRow = `
-          <tr>
-            <td>${now}</td>
-            <td>${currency === 'euro' ? 'Euro (€)' : currency === 'dollar' ? 'Dolar ($)' : 'Lehva (лв)'}</td>
-            <td>${amount} ${symbols[currency]}</td>
-            <td>${formattedResult}₺</td>
-          </tr>
-        `;
-        historyTable.insertAdjacentHTML("beforeend", newRow);
       } else {
         resultElement.innerHTML = `<p>Lütfen geçerli bir miktar giriniz.</p>`;
       }
     }
 
     function clearTable() {
-      const historyTable = document.getElementById("history");
-      historyTable.innerHTML = "";
+      localStorage.removeItem("historyData");
+      loadHistory();
     }
   </script>
 </body>
