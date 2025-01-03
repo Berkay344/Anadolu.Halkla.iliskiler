@@ -1,216 +1,262 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tüm maçların Hd yayını... Berkay Sportsᴴᴰ</title>
-    <link rel="icon" type="image/png" href="https://i.hizliresim.com/q0z3s8m.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Döviz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f7ff;
+      margin: 0;
+      padding: 20px;
+    }
 
-    <!-- Open Graph Meta Etiketleri -->
-    <meta property="og:title" content="Berkay Sportsᴴᴰ">
-    <meta property="og:description" content="Tüm maçların HD yayını ve Süper Lig  burada!">
-    <meta property="og:image" content="https://i.hizliresim.com/q0z3s8m.png">
-    <meta property="og:url" content="https://berkay344.github.io/BerkaySportsHd">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Berkay Sportsᴴᴰ - Canlı Maç Yayını">
-    <meta name="twitter:description" content="Tüm maçların HD yayını ve Süper Lig skorları burada!">
-    <meta name="twitter:image" content="https://i.hizliresim.com/rp9zm4r.png">
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+    h1 {
+      font-size: 36px; /* Başlık boyutunu artırdım */
+      font-weight: bold; /* Kalınlaştırdım */
+      color: red; /* Kırmızı renk yaptım */
+      margin-bottom: 20px; /* Alt boşluk ekledim */
+    }
 
-        .logo-container {
-            margin-top: 20px;
-        }
+    .credit {
+      margin-top: 10px;
+      font-size: 14px;
+    }
 
-        .logo-container img {
-            width: 300px;
-            height: auto;
-        }
+    .credit a {
+      text-decoration: none;
+      color: #007acc;
+    }
 
-        video {
-            width: 90%;
-            max-width: 1000px;
-            height: auto;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
+    .credit a:hover {
+      text-decoration: underline;
+    }
 
-        .channel-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
+    .converter {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+    }
 
-        .channel-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
+    /* Döviz kurları için alt tablo */
+    .exchange-rates {
+      margin-top: 20px;
+      background: #ffffff;
+      border: 1px solid #000;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
 
-        .channel-item:hover {
-            transform: scale(1.1);
-        }
+    .exchange-rates table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-        .channel-item img {
-            width: auto;
-            height: 30px;
-        }
+    .exchange-rates td, .exchange-rates th {
+      padding: 8px;
+      text-align: left;
+      border: 1px solid #000;
+    }
 
-        .channel-item img.buyuk {
-            height: 60px;
-        }
+    .exchange-rates th {
+      background-color: #000;
+      color: yellow;
+    }
 
-        .channel-item a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
+    .exchange-rates td span {
+      font-weight: bold; /* Kur değerlerini kalın yaz */
+    }
 
-        footer {
-            margin-top: 20px;
-        }
+    .exchange-rates .green-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: green;
+      border-radius: 50%;
+      animation: blink 1s infinite;
+    }
 
-        .action-section {
-            margin: 30px 0;
-        }
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
 
-        .action-section a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: black;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
 
-        .action-section a:hover {
-            background-color: #1e56a0;
-        }
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
 
-        .instagram-logo {
-            width: 50px;
-            height: 50px;
-            margin-right: 20px;
-        }
-    </style>
+    button:hover {
+      background-color: #005f99;
+    }
+
+    #result {
+      margin: 20px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    thead {
+      background-color: #007acc;
+      color: white;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    .clear-button {
+      margin-top: 10px;
+      background-color: #ff4d4d;
+    }
+
+    .clear-button:hover {
+      background-color: #cc0000;
+    }
+  </style>
 </head>
 <body>
-    <div class="logo-container">
-        <a href="https://hizliresim.com/rp9zm4r">
-            <img src="https://i.hizliresim.com/rp9zm4r.png" alt="Logo">
-        </a>
+  <div class="container">
+    <h1>Esos Döviz</h1>
+    <div class="converter">
+      <label for="amount">Miktar:</label>
+      <input type="number" id="amount" placeholder="Örnek: 50">
+      
+      <label for="currency">Para Birimi:</label>
+      <select id="currency">
+        <option value="euro">Euro (€)</option>
+        <option value="dollar">Dolar ($)</option>
+        <option value="lehva">Lehva (лв)</option>
+      </select>
+      
+      <button onclick="convertCurrency()">Hesapla</button>
     </div>
 
-    <!-- Ana yayın ekranı -->
-    <video id="video" controls autoplay>
-        <source src="https://alpha.cf-worker-c4d6a2ea181de1b9.workers.dev/live/xbeinsports-1/playlist.m3u8" type="application/x-mpegURL">
-    </video>
+    <div id="result"></div>
 
-    <!-- Kanal listesi -->
-    <div class="channel-list">
-        <div class="channel-item">
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=601" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_bein_sports_1.png" alt="Bein Sport 1 Yedek">
-            </a>
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=601" target="_blank">Bein Sport 1 Yedek</a>
-        </div>
-        <div class="channel-item">
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=602" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Logo_bein_sports_2.png" alt="Bein 2">
-            </a>
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=602" target="_blank">Bein Sport 2</a>
-        </div>
-        <div class="channel-item">
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=603" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Logo_bein_sports_3.png" alt="Kanal 3">
-            </a>
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=603" target="_blank">Bein Sport 3</a>
-        </div>
-        <div class="channel-item">
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=605" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/tr/d/db/TivibuSporLogo1.PNG" alt="Tivibu 1">
-            </a>
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=605" target="_blank">Tivibu Spor 1</a>
-        </div>
-        <div class="channel-item">
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=607" target="_blank">
-                <img class="buyuk" src="https://tvprofil.com/img/kanali-logo/Tivibu_Spor_2_TR_logo.png" alt="Tivibu Spor 2">
-            </a>
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=607" target="_blank">Tivibu Spor 2</a>
-        </div>
-        <div class="channel-item">
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=608" target="_blank">
-                <img class="buyuk" src="https://i.hizliresim.com/fquksv7.png" alt="Tivibu Spor 3">
-            </a>
-            <a href="https://ia.strmrdrfrosc.click/index.php?id=608" target="_blank">Tivibu Spor 3</a>
-        </div>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Saat</th>
+          <th>Para Birimi</th>
+          <th>Miktar</th>
+          <th>Türk Lirası Karşılığı</th>
+        </tr>
+      </thead>
+      <tbody id="history"></tbody>
+    </table>
 
-    <footer>
-        <h2>Developer by Berkay</h2>
-        <div class="action-section">
-            <a href="https://www.instagram.com/trakyali_pitbul" target="_blank">
-                <img class="instagram-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
-                Takip Et Destek Ol
-            </a>
-        </div>
-    </footer>
+    <button class="clear-button" onclick="clearTable()">Tabloyu Temizle</button>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        var video = document.getElementById('video');
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource('https://us-cdn-1.varsportscdn1.lol/601/tracks-v1a1/mono.m3u8');
-            hls.attachMedia(video);
+  <!-- Döviz Kurları Tablosu -->
+  <div class="exchange-rates">
+    <table>
+      <thead>
+        <tr>
+          <th>Para Birimi / Currency</th>
+          <th>Kur / Exchange Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="green-dot"></span> Euro:</td>
+          <td><span>35.00₺</span></td>
+        </tr>
+        <tr>
+          <td><span class="green-dot"></span> Dolar:</td>
+          <td><span>34.00₺</span></td>
+        </tr>
+        <tr>
+          <td><span class="green-dot"></span> Lehva:</td>
+          <td><span>17.00₺</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
+  <script>
+    const exchangeRates = {
+      euro: 35.00,  
+      dollar: 34.00,
+      lehva: 17.00   
+    };
 
-            hls.on(Hls.Events.ERROR, function(event, data) {
-                if (data.fatal) {
-                    switch (data.fatal) {
-                        case Hls.ErrorTypes.NETWORK_ERROR:
-                            console.log("Ağ hatası, bağlantıyı tekrar başlatıyoruz.");
-                            break;
-                        case Hls.ErrorTypes.MEDIA_ERROR:
-                            console.log("Medya hatası, akış tekrar başlatılıyor.");
-                            break;
-                        default:
-                            console.log("Bilinmeyen hata.");
-                            break;
-                    }
-                }
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://us-cdn-1.varsportscdn1.lol/601/tracks-v1a1/mono.m3u8';
-            video.addEventListener('loadedmetadata', function() {
-                video.play();
-            });
-        }
-    </script>
+    function convertCurrency() {
+      const amount = document.getElementById("amount").value;
+      const currency = document.getElementById("currency").value;
+      const rate = exchangeRates[currency];
+      const resultElement = document.getElementById("result");
+      const historyTable = document.getElementById("history");
+
+      const symbols = {
+        euro: '€',
+        dollar: '$',
+        lehva: 'лв'
+      };
+
+      if (amount && rate) {
+        const result = Math.round(amount * rate);
+        const formattedResult = result.toLocaleString('tr-TR'); // Türkçe formatta binlik ayırıcı ile
+        const now = new Date().toLocaleTimeString();
+
+        resultElement.innerHTML = `
+          <p>${amount} ${symbols[currency]} = ${formattedResult}₺</p>
+        `;
+
+        const newRow = `
+          <tr>
+            <td>${now}</td>
+            <td>${currency === 'euro' ? 'Euro (€)' : currency === 'dollar' ? 'Dolar ($)' : 'Lehva (лв)'}</td>
+            <td>${amount} ${symbols[currency]}</td>
+            <td>${formattedResult}₺</td>
+          </tr>
+        `;
+        historyTable.insertAdjacentHTML("beforeend", newRow);
+      } else {
+        resultElement.innerHTML = `<p>Lütfen geçerli bir miktar giriniz.</p>`;
+      }
+    }
+
+    function clearTable() {
+      const historyTable = document.getElementById("history");
+      historyTable.innerHTML = "";
+    }
+  </script>
 </body>
 </html>
