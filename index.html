@@ -1,306 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Döviz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #e6f7ff;
-      margin: 0;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anadolu Edu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
+        .header {
+            text-align: center;
+            color: red;
+            margin-bottom: 20px;
+        }
 
-    h1 {
-      font-weight: bold;
-      color: red;
-    }
+        .header h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
 
-    .credit {
-      margin-top: 10px;
-      font-size: 14px;
-    }
+        .header p {
+            font-size: 18px;
+            font-weight: normal;
+            color: white;
+        }
 
-    .credit a {
-      text-decoration: none;
-      color: #007acc;
-    }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
 
-    .credit a:hover {
-      text-decoration: underline;
-    }
+        button {
+            width: 300px;
+            padding: 20px;
+            font-size: 20px;
+            color: white; /* Yazı beyaz */
+            background-color: transparent; /* Arka plan şeffaf */
+            border: 3px solid; /* Çerçeve */
+            border-radius: 10px;
+            cursor: pointer;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Yazı gölgesi */
+            transition: all 0.4s ease;
+        }
 
-    .converter {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      text-align: left;
-    }
+        button:nth-child(1) {
+            border-color: purple;
+            box-shadow: 0 0 10px purple;
+        }
 
-    /* Döviz kurları için alt tablo */
-    .exchange-rates {
-      margin-top: 20px;
-      background: #ffffff;
-      border: 1px solid #000;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 100%;
-    }
+        button:nth-child(1):hover {
+            background-color: purple;
+            box-shadow: 0 0 20px purple;
+        }
 
-    .exchange-rates table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+        button:nth-child(2) {
+            border-color: blue;
+            box-shadow: 0 0 10px blue;
+        }
 
-    .exchange-rates td, .exchange-rates th {
-      padding: 8px;
-      text-align: left;
-      border: 1px solid #000;
-    }
+        button:nth-child(2):hover {
+            background-color: blue;
+            box-shadow: 0 0 20px blue;
+        }
 
-    .exchange-rates th {
-      background-color: #000;
-      color: yellow;
-    }
+        button:nth-child(3) {
+            border-color: orange;
+            box-shadow: 0 0 10px orange;
+        }
 
-    .exchange-rates td span {
-      font-weight: bold; /* Kur değerlerini kalın yaz */
-    }
+        button:nth-child(3):hover {
+            background-color: orange;
+            box-shadow: 0 0 20px orange;
+        }
 
-    .exchange-rates .green-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background-color: green;
-      border-radius: 50%;
-      animation: blink 1s infinite;
-    }
+        button:nth-child(4) {
+            border-color: lime;
+            box-shadow: 0 0 10px lime;
+        }
 
-    @keyframes blink {
-      0%, 50% {
-        opacity: 1;
-      }
-      50%, 100% {
-        opacity: 0;
-      }
-    }
+        button:nth-child(4):hover {
+            background-color: lime;
+            box-shadow: 0 0 20px lime;
+        }
 
-    input, select, button {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
+        .social-logo {
+            position: fixed;
+            width: 70px; /* Logo büyütüldü */
+            height: 70px;
+            background-size: cover;
+        }
 
-    button {
-      background-color: #007acc;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+        .instagram {
+            bottom: 40px; /* Daha aşağıya alındı */
+            left: 20px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png');
+        }
 
-    button:hover {
-      background-color: #005f99;
-    }
+        .whatsapp {
+            bottom: 40px; /* Daha aşağıya alındı */
+            right: 20px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
+        }
 
-    #result {
-      margin: 20px 0;
-      font-size: 18px;
-      color: #333;
-    }
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 20px red;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            animation: blink 1s infinite;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+        .modal p {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
 
-    thead {
-      background-color: #007acc;
-      color: white;
-    }
+        .modal button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    th, td {
-      padding: 10px;
-      text-align: center;
-      border: 1px solid #ddd;
-    }
-
-    .clear-button {
-      margin-top: 10px;
-      background-color: #ff4d4d;
-    }
-
-    .clear-button:hover {
-      background-color: #cc0000;
-    }
-
-    .save-button {
-      background-color: green;
-    }
-
-    .save-button:hover {
-      background-color: #005f00;
-    }
-  </style>
+        @keyframes blink {
+            0% { box-shadow: 0 0 20px red; }
+            50% { box-shadow: 0 0 30px yellow; }
+            100% { box-shadow: 0 0 60px red; }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Esos Döviz</h1>
-    <div class="converter">
-      <label for="amount">Miktar:</label>
-      <input type="number" id="amount" placeholder="Örnek: 50">
-      
-      <label for="currency">Para Birimi:</label>
-      <select id="currency">
-        <option value="euro">Euro (€)</option>
-        <option value="dollar">Dolar ($)</option>
-        <option value="lehva">Lehva (лв)</option>
-      </select>
-      
-      <button onclick="convertCurrency()">Hesapla</button>
-      <button class="save-button" onclick="saveData()">Kaydet</button>
+    <div class="header">
+        <h1>Anadolu Üniversitesi</h1>
+        <p>Halkla İlişkiler ve Reklamcılık</p>
     </div>
 
-    <div id="result"></div>
+    <div class="button-container">
+        <button onclick="navigateTo('https://ekampus.anadolu.edu.tr/#/login')">E Kampüs - Ders Araçları</button>
+        <button onclick="navigateTo('https://aosogrenci.anadolu.edu.tr/')">ÖBS - Öğrenci Bilgi Sistemi</button>
+        <button onclick="navigateTo('https://halklailiskilervereklamcilik.blogspot.com/2024/11/aofHalklaIliskiler.html?m=1')">Bölümümüz - Bilgilendirme</button>
+        <button onclick="navigateTo('https://berkay344.github.io/hesap/')">Not Hesaplayıcı - Vize & Final</button>
+    </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Saat</th>
-          <th>Para Birimi</th>
-          <th>Miktar</th>
-          <th>Türk Lirası Karşılığı</th>
-        </tr>
-      </thead>
-      <tbody id="history"></tbody>
-    </table>
+    <a href="https://www.instagram.com/aof_halklailiskilerreklamcilik/" target="_blank" class="social-logo instagram"></a>
+    <a href="https://chat.whatsapp.com/HxUm7sZkBkxAomZFu1tHU8" target="_blank" class="social-logo whatsapp"></a>
 
-    <button class="clear-button" onclick="clearTable()">Tabloyu Temizle</button>
-  </div>
+    <div id="modal" class="modal">
+        <p>18-19 OCAK FİNAL!</p>
+        <button onclick="closeModal()">Tamam</button>
+    </div>
 
-  <!-- Döviz Kurları Tablosu -->
-  <div class="exchange-rates">
-    <table>
-      <thead>
-        <tr>
-          <th>Para Birimi / Currency</th>
-          <th>Kur / Exchange Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="green-dot"></span> Euro:</td>
-          <td><span>35.00₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="green-dot"></span> Dolar:</td>
-          <td><span>34.00₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="green-dot"></span> Lehva:</td>
-          <td><span>17.00₺</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <script>
+        function navigateTo(url) {
+            window.open(url, '_blank');
+        }
 
-  <script>
-    const exchangeRates = {
-      euro: 35.00,  
-      dollar: 34.00,
-      lehva: 17.00   
-    };
+        function showModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
 
-    // Verilerin kaydedilmesi
-    function saveData() {
-      const amount = document.getElementById("amount").value;
-      const currency = document.getElementById("currency").value;
-      const rate = exchangeRates[currency];
-      const symbols = {
-        euro: '€',
-        dollar: '$',
-        lehva: 'лв'
-      };
-      if (amount && rate) {
-        const result = Math.round(amount * rate);
-        const formattedResult = result.toLocaleString('tr-TR');
-        const now = new Date().toLocaleTimeString();
-        
-        // Veriyi localStorage'a kaydet
-        let history = JSON.parse(localStorage.getItem("historyData")) || [];
-        history.push({
-          time: now,
-          currency: currency === 'euro' ? 'Euro (€)' : currency === 'dollar' ? 'Dolar ($)' : 'Lehva (лв)',
-          amount: `${amount} ${symbols[currency]}`,
-          result: `${formattedResult}₺`
-        });
-        
-        localStorage.setItem("historyData", JSON.stringify(history));
-        loadHistory(); // Tabloyu güncelle
-      }
-    }
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
 
-    // Verileri localStorage'tan yüklemek
-    function loadHistory() {
-      const historyTable = document.getElementById("history");
-      const history = JSON.parse(localStorage.getItem("historyData")) || [];
-      historyTable.innerHTML = "";
-      history.forEach(entry => {
-        const newRow = `
-          <tr>
-            <td>${entry.time}</td>
-            <td>${entry.currency}</td>
-            <td>${entry.amount}</td>
-            <td>${entry.result}</td>
-          </tr>
-        `;
-        historyTable.insertAdjacentHTML("beforeend", newRow);
-      });
-    }
-
-    // Sayfa ilk açıldığında verileri yükle
-    window.onload = loadHistory;
-
-    function convertCurrency() {
-      const amount = document.getElementById("amount").value;
-      const currency = document.getElementById("currency").value;
-      const rate = exchangeRates[currency];
-      const resultElement = document.getElementById("result");
-
-      const symbols = {
-        euro: '€',
-        dollar: '$',
-        lehva: 'лв'
-      };
-
-      if (amount && rate) {
-        const result = Math.round(amount * rate);
-        const formattedResult = result.toLocaleString('tr-TR');
-        resultElement.innerHTML = `
-          <p>${amount} ${symbols[currency]} = ${formattedResult}₺</p>
-        `;
-      } else {
-        resultElement.innerHTML = `<p>Lütfen geçerli bir miktar giriniz.</p>`;
-      }
-    }
-
-    function clearTable() {
-      localStorage.removeItem("historyData");
-      loadHistory();
-    }
-  </script>
+        window.onload = function() {
+            setTimeout(showModal, 3000);
+        };
+    </script>
 </body>
 </html>
