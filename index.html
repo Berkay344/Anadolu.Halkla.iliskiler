@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-36Y153E5JX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-36Y153E5JX');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anadolu Edu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Kaydırmayı engeller */
-            font-family: Arial, sans-serif;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
         }
 
         body {
@@ -28,8 +20,8 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-color: #ffe1d6;
-            margin-top: -50px; /* Sayfayı yukarı taşı */
+            background-color: #fff4f4; /* Açık kırmızı arka plan */
+            color: #4a0000; /* Koyu kırmızı metin */
         }
 
         .header {
@@ -45,7 +37,7 @@
         .header p {
             font-size: 22px;
             font-weight: bold;
-            color: black;
+            color: #a10000; /* Koyu kırmızı */
             margin-top: 10px;
         }
 
@@ -58,36 +50,38 @@
 
         button {
             width: 300px;
-            padding: 20px;
-            font-size: 20px;
+            padding: 15px;
+            font-size: 18px;
             font-weight: bold;
-            color: black;
-            background-color: #96c7ff;
-            border: 2px solid black;
-            border-radius: 10px;
+            color: #fff;
+            background-color: #d32f2f;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
         button:hover {
-            background-color: #4287f5;
+            background-color: #b71c1c;
+            transform: translateY(-3px);
         }
 
         .social-logo {
             position: fixed;
-            width: 65px; /* Daha küçük boyut */
-            height: 65px; /* Daha küçük boyut */
+            width: 50px;
+            height: 50px;
             background-size: cover;
         }
 
         .instagram {
-            bottom: 20px; /* Daha aşağı */
+            bottom: 20px;
             left: 20px;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png');
         }
 
         .whatsapp {
-            bottom: 20px; /* Daha aşağı */
+            bottom: 20px;
             right: 20px;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
         }
@@ -97,34 +91,57 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #FBEC5D;
+            background: #ffd6d6; /* Açık kırmızı */
+            color: #4a0000; /* Koyu kırmızı yazı */
             padding: 20px;
-            border: 4px solid black;
-            border-radius: 8px;
-            display: none;
+            border: 2px solid #a10000; /* Koyu kırmızı çerçeve */
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 10;
+        }
+
+        .modal h3 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-decoration: underline;
         }
 
         .modal p {
-            font-size: 24px;
-            font-weight: bold;
-            color: black;
+            font-size: 18px;
+            margin: 5px 0;
+            font-weight: 600;
         }
 
         .modal button {
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 15px;
+            padding: 10px 15px;
             font-size: 16px;
-            background-color: #52abff;
-            color: black;
+            font-weight: bold;
+            color: #fff;
+            background-color: #d32f2f;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .modal button:hover {
-            background-color: #007ACC;
+            background-color: #b71c1c;
+        }
+
+        /* Arka plan bulanıklığı */
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 5;
         }
     </style>
 </head>
@@ -144,11 +161,13 @@
     <a href="https://www.instagram.com/aof_halklailiskilerreklamcilik/" target="_blank" class="social-logo instagram"></a>
     <a href="https://chat.whatsapp.com/HxUm7sZkBkxAomZFu1tHU8" target="_blank" class="social-logo whatsapp"></a>
 
+    <div id="backdrop" class="backdrop"></div>
+
     <div id="modal" class="modal">
-    <p><b>2025 ŞUBAT AYI TAKVİMİ</b></p>
-    <p>- 10 Şubat: Bahar Dönemi Kayıt Yenileme</p>
-    <p>- 21 Şubat: Sınav Merkezi Değişikliği</p>
-    <button onclick="closeModal()">Tamam</button>
+        <h3>2025 ŞUBAT AYI TAKVİMİ</h3>
+        <p>10 ŞUBAT: BAHAR DÖNEMİ KAYIT YENİLEME</p>
+        <p>21 ŞUBAT: SINAV MERKEZİ DEĞİŞİKLİĞİ</p>
+        <button onclick="closeModal()">Tamam</button>
     </div>
 
     <script>
@@ -158,10 +177,12 @@
 
         function showModal() {
             document.getElementById('modal').style.display = 'block';
+            document.getElementById('backdrop').style.display = 'block';
         }
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
+            document.getElementById('backdrop').style.display = 'none';
         }
 
         window.onload = function() {
