@@ -10,9 +10,9 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            height: auto; /* Sayfanın kaymasını aç */
-            overflow-x: hidden; /* Yatay kaydırmayı kapat */
-            overflow-y: auto;   /* Dikey kaydırmayı aç */
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
             font-family: 'Roboto', sans-serif;
             background-color: #fff4f4;
             color: #4a0000;
@@ -60,12 +60,28 @@
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
         }
 
+        .youtube {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/90/Logo_of_YouTube_%282013-2015%29.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 90px;
+            height: 60px;
+        }
+
+        .abone-ol {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FF0000;
+            margin-top: 5px;
+        }
+
         .button-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 40px;
+            margin-top: 30px;
         }
 
         button {
@@ -155,10 +171,13 @@
         <img src="https://www.anadolu.edu.tr/uploads/anadolu/ckfinder/web/files/T%C3%9CRK%C3%87E%20LOGOLAR%20Anadolu%20%C3%9Cniversitesi-01(1).png" alt="Anadolu Üniversitesi Logosu">
         <p>Halkla İlişkiler ve Reklamcılık</p>
         
-        <!-- Instagram ve WhatsApp Butonları -->
         <div class="social-container">
             <a href="https://www.instagram.com/aof_halklailiskilerreklamcilik/" target="_blank" class="social-logo instagram"></a>
             <a href="https://chat.whatsapp.com/HxUm7sZkBkxAomZFu1tHU8" target="_blank" class="social-logo whatsapp"></a>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <a href="https://youtube.com/@aofcuabla?si=UbuzUzh9HpBcmuSy" target="_blank" class="social-logo youtube"></a>
+                <span class="abone-ol">ABONE OL</span>
+            </div>
         </div>
     </div>
 
@@ -174,10 +193,9 @@
     <div id="backdrop" class="backdrop"></div>
 
     <div id="modal" class="modal">
-        <h3>2025 TAKVİMİ</h3>
+        <h3>2025 ŞUBAT AYI TAKVİMİ</h3>
         <p>10 ŞUBAT: BAHAR DÖNEMİ KAYIT YENİLEME</p>
         <p>21 ŞUBAT: SINAV MERKEZİ DEĞİŞİKLİĞİ</p>
-        <p>19 NİSAN: BAHAR DÖNEMİ ARA SINAVI</p>
         <button onclick="closeModal()">Tamam</button>
     </div>
 
